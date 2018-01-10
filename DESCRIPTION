@@ -9,5 +9,7 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Imports: data.table,
+    testthat,
     dplyr,
-    testthat
+    readxl,
+    tidyr

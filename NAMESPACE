@@ -2,6 +2,6 @@
 
 export(lese_excel)
 import(data.table)
-import(dplyr)
-import(readxl)
 import(tidyr)
+importFrom(dplyr,"%>%")
+importFrom(readxl,read_excel)
