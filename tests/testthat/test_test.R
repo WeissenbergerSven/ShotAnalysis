@@ -15,7 +15,7 @@ test_that("tests for grp variable",{
 })
 
 test_that("tests for dat variable",{
-  set.seed(125)
+  set.seed(1235)
   grp <- as.factor(rep(c(0,1),each=15))
   
   dat <- matrix(0,nrow=100,ncol=30)
