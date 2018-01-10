@@ -7,8 +7,6 @@
 #' @return data.table
 #' @import data.table
 #' @import tidyr
-#' @importFrom readxl read_excel
-#' @importFrom dplyr %>% 
 #' @export
 lese_excel <- function(name, path, format = ".xlsx", ...){
   paste0(path, name, format) %>% # get the right name

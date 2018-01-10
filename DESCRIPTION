@@ -13,3 +13,4 @@ Imports: data.table,
     dplyr,
     readxl,
     tidyr
+Suggests: testthat
