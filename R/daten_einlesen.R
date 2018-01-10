@@ -1,8 +1,3 @@
-yx <- 213
-
-
-
-
 #' Read excel table.
 #'
 #' For given path, read the excel table with name x.
