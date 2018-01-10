@@ -1,7 +1,7 @@
 context("tests on inputs")
 
 test_that("tests for grp variable",{
-  set.seed(1234675)
+  set.seed(12345)
   dat <- matrix(rnorm(100*30),nrow=100,ncol=30)
   
   grp <- rep(c(0,1),each=15)
