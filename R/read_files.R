@@ -1,31 +1,52 @@
-#' Read excel table.
+#-----------------GET LIST OF TABLES------------
+
+#' get the information
+#' 
+#' Read the excel tables and edit them.
+#' @param path_to_excel String. Path to the excel table.
+#' @param remove_empty Boolean. If \code{TRUE} remove the empty table in the list.
+#' @return list of data.table with the edited excel tables.
+#' @examples 
+#' get_shoting_list(path_to_excel = "Desktop/excel/")
+#' @export
+get_shooting_list <- function(path_to_excel,
+                              remove_empty = T, ...){
+  LIST_OF_TABLE <- get_the_one_list(path_to_excel = PATH_TO_EXCEL_TABLE,
+                                    lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
+                                    remove_empty = T)
+  LIST_OF_TABLE$Shots <- clean_shots(LIST_OF_TABLE$Shots)
+  return(LIST_OF_TABLE)
+  
+}
+
+# ------------------READ TABLES--------------
+
+#' Read one excel table.
 #'
-#' For given path, read the excel table with name x.
-#' @param name String. Name of the excel table.
-#' @param path String. Path to the excel table.
+#' For given path, read the excel table with name \code{name_excel_table}.
+#' @param name_excel_table String. Name of the excel table.
+#' @param path_to_excel String. Path to the excel table.
 #' @param format String. Ending of the filename.
 #' @return data.table
-#' @import data.table
-#' @import tidyr
-#' @export
-lese_excel <- function(name, path, format = ".xlsx", ...){
-  paste0(path, name, format) %>% # get the right name
+lese_excel <- function(name_excel_table, path_to_excel, format = ".xlsx", ...){
+  paste0(path_to_excel, name_excel_table, format) %>% # get the right name
     read_excel() %>%             # read the table
     as.data.table()              # convert into data.table
 }
 
-#' Save tables in one list .
+#' Save excel-tables in one list .
 #'
+#' @param path_to_excel String. Path to the folder of the tables
 #' @param list_of_excel Character Vector. Names of the excel-tables.
-#' @param path String. Path to the folder of the tables
-#' @param remove_empty Boolean.
+#' @param remove_empty Boolean. If \code{TRUE} remove the empty table in the list.
 #' @return list.
-get_the_one_list <- function(lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
-                             path = PATH_TO_EXCEL_TABLE,
-                             remove_empty = REMOVE_EMPTY_TABLE,...){
+get_the_one_list <- function(path_to_excel = PATH_TO_EXCEL_TABLE,
+                             lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
+                             remove_empty = T,...){
   list_of_table <- list()
   for(i in lists_of_excel){
-    table <- lese_excel(i, path = path)
+    table <- lese_excel(name_excel_table = i,
+                        path_to_excel = path_to_excel)
     if(remove_empty){ # Check if you want to delete empty table
       if(nrow(table) > 0){  # Only save not-emtpy tables
         list_of_table[[i]] <- table
@@ -36,16 +57,14 @@ get_the_one_list <- function(lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
   }
   return(list_of_table)
 }
-# LIST_OF_TABLE <- get_the_one_list(lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
-#                                   path = PATH_TO_EXCEL_TABLE,
-#                                   remove_empty = REMOVE_EMPTY_TABLE)
 
 
+#------------EDIT TABLES------------
 
 #' Edit character of Shots
 #'
 #' Separate the one column in Shots into multiple columns
-#' and then separate the additional information.
+#' and then separate the relevant information.
 #'
 #' @param x String. of the form "\"information\"text".
 #' @return String. with just the information.
@@ -57,12 +76,13 @@ delete_character <- function(x, ...){
 
 #' Filter only the information
 #'
-#' @param x data.table. Shots
+#' @param x data.table. Shots table
 #' @return data.table. with separated columns.
 clean_shots <- function(x, ...){
   # Separate into multiple columns
-  y <- x %>% separate(shotdata, into = SHOTS_COLUMNS, sep = "=")
-  # Remove the character aound the information
+  y <- x %>% 
+    separate(shotdata, into = SHOTS_COLUMNS, sep = "=")
+  # Remove the character around the information
   z <- y[, ':='(first = NULL,
                 x            = lapply(x, delete_character),
                 y            = lapply(y, delete_character),
@@ -81,5 +101,5 @@ clean_shots <- function(x, ...){
   return(z)
 }
 
-#LIST_OF_TABLE$Shots <- clean_shots(LIST_OF_TABLE$Shots)
+
 
