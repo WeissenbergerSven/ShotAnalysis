@@ -4,8 +4,8 @@
 \alias{get_the_one_list}
 \title{Save excel-tables in one list .}
 \usage{
-get_the_one_list(path_to_excel = PATH_TO_EXCEL_TABLE,
-  lists_of_excel = LIST_OF_TABLE_FROM_EXCEL, remove_empty = T, ...)
+get_the_one_list(path_to_excel, lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
+  remove_empty = T, ...)
 }
 \arguments{
 \item{path_to_excel}{String. Path to the folder of the tables}

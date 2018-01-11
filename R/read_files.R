@@ -17,7 +17,7 @@
 #' @export
 get_shooting_list <- function(path_to_excel,
                               remove_empty = T, ...){
-  LIST_OF_TABLE <- get_the_one_list(path_to_excel = PATH_TO_EXCEL_TABLE,
+  LIST_OF_TABLE <- get_the_one_list(path_to_excel = path_to_excel,
                                     lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
                                     remove_empty = T)
   LIST_OF_TABLE$Shots <- clean_shots(LIST_OF_TABLE$Shots)
@@ -47,7 +47,7 @@ lese_excel <- function(name_excel_table, path_to_excel, format = ".xlsx", ...){
 #' @param list_of_excel Character Vector. Names of the excel-tables.
 #' @param remove_empty Boolean. If \code{TRUE} remove the empty table in the list.
 #' @return list.
-get_the_one_list <- function(path_to_excel = PATH_TO_EXCEL_TABLE,
+get_the_one_list <- function(path_to_excel,
                              lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
                              remove_empty = T,...){
   list_of_table <- list()
@@ -91,8 +91,8 @@ clean_shots <- function(x, ...){
     separate(shotdata, into = SHOTS_COLUMNS, sep = "=")
   # Remove the character around the information
   z <- y[, ':='(first = NULL,
-                x_co            = lapply(x_co, delete_character),
-                y_co            = lapply(y_co, delete_character),
+                x_co         = lapply(x_co, delete_character),
+                y_co         = lapply(y_co, delete_character),
                 teiler       = lapply(teiler, delete_character),
                 ishot        = lapply(ishot, delete_character),
                 isvalid      = lapply(isvalid, delete_character),
