@@ -91,8 +91,8 @@ clean_shots <- function(x, ...){
     separate(shotdata, into = SHOTS_COLUMNS, sep = "=")
   # Remove the character around the information
   z <- y[, ':='(first = NULL,
-                x            = lapply(x, delete_character),
-                y            = lapply(y, delete_character),
+                x_co            = lapply(x_co, delete_character),
+                y_co            = lapply(y_co, delete_character),
                 teiler       = lapply(teiler, delete_character),
                 ishot        = lapply(ishot, delete_character),
                 isvalid      = lapply(isvalid, delete_character),
