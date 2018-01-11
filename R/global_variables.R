@@ -36,8 +36,8 @@ LIST_OF_TABLE_FROM_EXCEL <- list("AllowedClasses",
 
 # Columns of Shots----------
 SHOTS_COLUMNS <- c("first",
-                   "x",
-                   "y",
+                   "x_co",
+                   "y_co",
                    "teiler",
                    "ishot",
                    "isvalid",

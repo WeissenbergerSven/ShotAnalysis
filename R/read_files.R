@@ -1,3 +1,5 @@
+
+
 #-----------------GET LIST OF TABLES------------
 
 #' get the information
@@ -8,6 +10,10 @@
 #' @return list of data.table with the edited excel tables.
 #' @examples 
 #' get_shoting_list(path_to_excel = "Desktop/excel/")
+#' @import data.table
+#' @importFrom dplyr %>%
+#' @importFrom readxl read_excel
+#' @importFrom tidyr separate
 #' @export
 get_shooting_list <- function(path_to_excel,
                               remove_empty = T, ...){
@@ -15,6 +21,7 @@ get_shooting_list <- function(path_to_excel,
                                     lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
                                     remove_empty = T)
   LIST_OF_TABLE$Shots <- clean_shots(LIST_OF_TABLE$Shots)
+  devtools::use_data(LIST_OF_TABLE, overwrite = TRUE)
   return(LIST_OF_TABLE)
   
 }
