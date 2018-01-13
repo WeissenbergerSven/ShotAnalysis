@@ -7,7 +7,9 @@ source("./server/server_eins.R")
 shinyServer(function(input, output) {
   
   output$distPlot <-  renderPlot({
-    max <- LIST_OF_TABLE$Shots[fidShooters == input$shooter]
+    max <- LIST_OF_TABLE$Shots[fidShooters == input$shooter &
+                                 as.Date(shottimestamp) >= input$all_date[1]  &
+                                 as.Date(shottimestamp) <= input$all_date[2]]
     
         p <- ggplot(data = max) +
       geom_point(aes(0,0, color = "red"), size = 10) +
