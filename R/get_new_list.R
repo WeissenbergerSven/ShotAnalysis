@@ -5,6 +5,8 @@
 # library(dplyr)
 # library(tidyr)
 # library(ggplot2)
+# library(shiny)
 # LIST_OF_TABLE <- get_shooting_list("../excelTable/")
 # devtools::use_data(LIST_OF_TABLE, overwrite = TRUE)
+# runApp("./Shiny_app/")
 
