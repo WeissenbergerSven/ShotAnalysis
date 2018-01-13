@@ -1,5 +1,5 @@
 name_table <- LIST_OF_TABLE$Shooters[,.(name = paste0(lastname, ", ", firstname),
-                                      idShooters)] %>% unique()
+                                        idShooters)] %>% unique()
 name_selector <- name_table$idShooters
 names(name_selector)<- name_table$name
 
@@ -16,9 +16,15 @@ p <- sidebarLayout(
                    min = "2016-12-1",
                    max = Sys.Date())
     
-   
+    
   ),
-    mainPanel(
-    plotOutput("distPlot")
+  mainPanel(
+    tabsetPanel(
+      tabPanel("All Shots", plotOutput("all_shots")), 
+      tabPanel("x Variance", plotOutput("x_variance")),
+      tabPanel("y Variance", plotOutput("y_variance"))
+      
+      
+    )
   )
 )
