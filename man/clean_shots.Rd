@@ -4,10 +4,10 @@
 \alias{clean_shots}
 \title{Filter only the information}
 \usage{
-clean_shots(x, ...)
+clean_shots(table_shots, ...)
 }
 \arguments{
-\item{x}{data.table. Shots table}
+\item{table_shots}{data.table. Shots table}
 }
 \value{
 data.table. with separated columns.

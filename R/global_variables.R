@@ -35,7 +35,7 @@ load_LIST_OF_TABLE_FROM_EXCEL <- function(){
                                    "Teams",
                                    "Weapons"
   )
-  devtools::use_data(LIST_OF_TABLE_FROM_EXCEL)
+  devtools::use_data(LIST_OF_TABLE_FROM_EXCEL, overwrite = T)
   return(T)
 }
 
@@ -47,20 +47,31 @@ load_LIST_OF_TABLE_FROM_EXCEL <- function(){
 #' @export
 load_SHOTS_COLUMNS <- function(){
   SHOTS_COLUMNS <- c("first",
+                     "shootingrange",
+                     "shootersid",
+                     "shot",
+                     "shotcount",
+                     "run",
+                     "isvalid",
+                     "ishot",
+                     "iswarm",
                      "x_co",
                      "y_co",
                      "teiler",
-                     "ishot",
-                     "isvalid",
+                     "winkel",
+                     "disktype",
+                     "dummy",
+                     "shotTime",
+                     "menuid",
                      "datetime",
-                     "disktyp",
                      "isinnerten",
                      "commentvalid",
                      "valuation",
                      "innerten",
                      "full",
-                     "dec")
-  devtools::use_data(SHOTS_COLUMNS)
+                     "dec"
+  )
+  devtools::use_data(SHOTS_COLUMNS, overwrite = T)
   return(TRUE)
 }
 
