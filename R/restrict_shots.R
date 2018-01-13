@@ -27,6 +27,7 @@ remove_columns <- function(table_shot){
                          winkel,
                          disktype,
                          full,
+                         dec,
                          shottimestamp,
                          day = as.Date(shottimestamp)
                          )]

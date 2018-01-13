@@ -114,7 +114,7 @@ clean_shots <- function(table_shots, ...){
                                   valuation     = lapply(valuation, delete_character),
                                   innerten      = lapply(innerten, delete_character),
                                   full          = lapply(full, delete_character),
-                                  dec           = lapply(dec, delete_character)
+                                  dec           = sub(",", ".", lapply(dec, delete_character))
   )]
   return(table_clean)
 }
