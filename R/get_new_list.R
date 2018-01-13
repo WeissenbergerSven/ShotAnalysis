@@ -1,0 +1,10 @@
+# library(devtools)
+# library(ShotAnalysis)
+# library(data.table)
+# library(readxl)
+# library(dplyr)
+# library(tidyr)
+# library(ggplot2)
+# LIST_OF_TABLE <- get_shooting_list("../excelTable/")
+# devtools::use_data(LIST_OF_TABLE, overwrite = TRUE)
+

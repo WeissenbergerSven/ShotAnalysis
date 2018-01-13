@@ -20,10 +20,11 @@ get_shooting_list <- function(path_to_excel,
                                     remove_empty = T)
   LIST_OF_TABLE$Shots <- LIST_OF_TABLE$Shots %>% 
     clean_shots() %>% 
-    convert_integer()
-  devtools::use_data(LIST_OF_TABLE, overwrite = TRUE)
+    convert_integer() %>% 
+    remove_rows() %>% 
+    remove_columns()
+  # devtools::use_data(LIST_OF_TABLE, overwrite = TRUE)
   return(LIST_OF_TABLE)
-  
 }
 
 # ------------------READ TABLES--------------
@@ -125,11 +126,15 @@ clean_shots <- function(table_shots, ...){
 convert_integer <- function(table_shots){
   table_converted <- table_shots[,':='(
     x_co = as.numeric(x_co),
-    y_co = as.numeric(y_co)
-    # ,
-    # teiler = as.numeric(teiler),
-    # winkel = as.numeric(winkel),
-    # dec = as.numeric(dec)
+    y_co = as.numeric(y_co),
+    teiler = as.numeric(teiler),
+    winkel = as.numeric(winkel),
+    dec = as.numeric(dec),
+    full = as.integer(full),
+    shot = as.integer(shot),
+    disktype = as.character(disktype)
+    
+    
     
   )]
   return(table_converted)

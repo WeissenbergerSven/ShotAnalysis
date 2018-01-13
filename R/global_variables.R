@@ -1,3 +1,8 @@
+######  devtools::use_data(LIST_OF_TABLE_FROM_EXCEL, overwrite = T) cant be load in 
+######  function so save them otherwise
+ 
+
+
 # ------------List of all excel table---------------
 #' save namelist of the excel tables in the package datafile
 #' 
