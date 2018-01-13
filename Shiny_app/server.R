@@ -8,11 +8,12 @@ shinyServer(function(input, output) {
   
   output$distPlot <-  renderPlot({
     max <- LIST_OF_TABLE$Shots[fidShooters == input$shooter]
-
+    
         p <- ggplot(data = max) +
       geom_point(aes(0,0, color = "red"), size = 10) +
       geom_point(aes(x = x_co, y = y_co)) +
       geom_density2d(aes(x = x_co, y = y_co)) +
+          coord_cartesian(xlim = c(-1000, 1000), ylim = c(-1000, 1000)) +
       theme_bw()
     
     p

@@ -8,11 +8,10 @@ p <- sidebarLayout(
     selectizeInput(inputId = "shooter",
                    label = "Choose a person",
                    choices = name_selector)
+    
    
   ),
-  
-  # Show a plot of the generated distribution
-  mainPanel(
+    mainPanel(
     plotOutput("distPlot")
   )
 )
