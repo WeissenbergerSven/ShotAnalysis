@@ -27,11 +27,11 @@ shinyServer(function(input, output) {
                                             as.Date(shottimestamp) >= input$all_date[1]  &
                                             as.Date(shottimestamp) <= input$all_date[2]]
     p <- ggplot(all_shot_table) +
-      geom_violin(aes(0, x_co)) +
-      geom_hline(yintercept = 0) +
-      coord_cartesian(xlim = c(-1000, 1000), ylim = c(-1000, 1000)) +
-      theme_bw() +
-      coord_flip()
+      stat_density(aes(x = x_co, y = ..scaled..)) +
+      geom_vline(xintercept = 0) +
+     coord_cartesian(xlim = c(-1000, 1000)) +
+           theme_bw()
+      
     p
   })
   # plot the y variance
@@ -40,10 +40,12 @@ shinyServer(function(input, output) {
                                             as.Date(shottimestamp) >= input$all_date[1]  &
                                             as.Date(shottimestamp) <= input$all_date[2]]
     p <- ggplot(all_shot_table) +
-      geom_violin(aes(0, y_co)) +
+      stat_density(aes(x = y_co, y = ..scaled..)) +
       geom_vline(xintercept = 0) +
-      coord_cartesian(xlim = c(-0.5, 0.5), ylim = c(-1000, 1000)) +
-      theme_bw()
+      theme_bw() +
+    coord_cartesian(xlim = c(-1000, 1000))
+  
+      
     p
   })
 })
