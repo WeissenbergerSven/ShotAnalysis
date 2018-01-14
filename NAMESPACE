@@ -3,6 +3,7 @@
 export(get_series)
 export(get_shooting_list)
 export(load_LIST_OF_TABLE_FROM_EXCEL)
+export(load_PERSON_CHOOSE)
 export(load_SHOTS_COLUMNS)
 import(data.table)
 importFrom(dplyr,"%>%")

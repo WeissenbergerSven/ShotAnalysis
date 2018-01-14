@@ -80,7 +80,19 @@ load_SHOTS_COLUMNS <- function(){
   return(TRUE)
 }
 
-
+# ------------- ChOICES FOR PERSON ----------
+#' Create the person choice for the UI 
+#' 
+#' @return Boolean.
+#' @export
+load_PERSON_CHOOSE <- function(){
+  name_table <- LIST_OF_TABLE$Shooters[,.(name = paste0(lastname, ", ", firstname),
+                                          idShooters)] %>% unique()
+  name_selector <- name_table$idShooters
+  names(name_selector)<- name_table$name
+  devtools::use_data(name_selector, overwrite = T)
+  return(TRUE)
+}
 
 
 

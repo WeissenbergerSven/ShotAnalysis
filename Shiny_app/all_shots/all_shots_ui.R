@@ -2,12 +2,6 @@ mod_ui_all_shots <- function(id){
   # -------- CREATE NS --------
   ns <- NS(id)
   
-  # --------- CREATE CHOICES FOR PERSON ---------
-  name_table <- LIST_OF_TABLE$Shooters[,.(name = paste0(lastname, ", ", firstname),
-                                          idShooters)] %>% unique()
-  name_selector <- name_table$idShooters
-  names(name_selector)<- name_table$name
-  
   # --------- THE UI --------
   sidebarLayout(
     sidebarPanel(
