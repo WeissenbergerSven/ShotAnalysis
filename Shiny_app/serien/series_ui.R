@@ -18,7 +18,7 @@ mod_ui_serien <- function(id){
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("All Shots", plotOutput("all_shots" %>% ns))
+        tabPanel("Serein verlauf", plotOutput("serien_over_time" %>% ns))
         
       )
     )
