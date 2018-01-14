@@ -1,11 +1,14 @@
-customPlotUI <- function(id){
+mod_ui_all_shots <- function(id){
+  # -------- CREATE NS --------
   ns <- NS(id)
   
+  # --------- CREATE CHOICES FOR PERSON ---------
   name_table <- LIST_OF_TABLE$Shooters[,.(name = paste0(lastname, ", ", firstname),
                                           idShooters)] %>% unique()
   name_selector <- name_table$idShooters
   names(name_selector)<- name_table$name
   
+  # --------- THE UI --------
   sidebarLayout(
     sidebarPanel(
       selectizeInput(inputId = "shooter" %>% ns,
@@ -18,15 +21,12 @@ customPlotUI <- function(id){
                      end = "2017-11-24",
                      min = "2016-12-1",
                      max = Sys.Date())
-      
-      
     ),
     mainPanel(
       tabsetPanel(
         tabPanel("All Shots", plotOutput("all_shots" %>% ns)),
         tabPanel("x Variance" , plotOutput("x_variance" %>% ns)),
         tabPanel("y Variance" , plotOutput("y_variance" %>% ns))
-        
       )
     )
   )
