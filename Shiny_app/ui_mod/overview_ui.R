@@ -23,7 +23,9 @@ customPlotUI <- function(id){
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("All Shots", plotOutput("plot" %>% ns))
+        tabPanel("All Shots", plotOutput("all_shots" %>% ns)),
+        tabPanel("x Variance" , plotOutput("x_variance" %>% ns)),
+        tabPanel("y Variance" , plotOutput("y_variance" %>% ns))
         
       )
     )
