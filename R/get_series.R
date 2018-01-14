@@ -2,6 +2,7 @@
 #' 
 #' @param shoot_table data.table
 #' @return data.table
+#' @export
 get_series <- function(shoot_table){
   # Check if right table
   if(!all(c("day", "dec", "full") %in% names(shoot_table))){
