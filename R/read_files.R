@@ -8,10 +8,6 @@
 #' @return list of data.table with the edited excel tables.
 #' @examples 
 #' get_shoting_list(path_to_excel = "Desktop/excel/")
-#' @import data.table
-#' @importFrom dplyr 
-#' @importFrom readxl read_excel
-#' @importFrom tidyr separate
 #' @export
 get_shooting_list <- function(path_to_excel,
                               remove_empty = T, ...){
