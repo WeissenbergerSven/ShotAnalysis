@@ -1,5 +1,11 @@
 library(shiny)
-
+library(devtools)
+library(ShotAnalysis)
+library(data.table)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 # source for the server
 
 source("./server/server_eins.R")

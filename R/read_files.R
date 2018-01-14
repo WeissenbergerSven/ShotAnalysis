@@ -9,7 +9,7 @@
 #' @examples 
 #' get_shoting_list(path_to_excel = "Desktop/excel/")
 #' @import data.table
-#' @importFrom dplyr %>%
+#' @importFrom dplyr 
 #' @importFrom readxl read_excel
 #' @importFrom tidyr separate
 #' @export
