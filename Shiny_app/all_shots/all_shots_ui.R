@@ -4,14 +4,10 @@ mod_ui_all_shots_all <- function(id){
   
   # --------- THE UI --------
   tagList(
-    dateRangeInput(inputId = "all_date" %>% ns,
-                   label = "Choose daterange",
-                   start = "2016-12-01",
-                   end = "2017-11-24",
-                   min = "2016-12-1",
-                   max = Sys.Date()),
-    
-    tabPanel("All Shots", plotOutput("all_shots" %>% ns))
+    tabPanel("All Shots",
+             plotlyOutput("all_shots" %>% ns,
+                          width = "500px",
+                          height = "500px"))
   )
 }
 mod_ui_all_shots_x <- function(id){
@@ -20,14 +16,8 @@ mod_ui_all_shots_x <- function(id){
   
   # --------- THE UI --------
   tagList(
-    dateRangeInput(inputId = "all_date" %>% ns,
-                   label = "Choose daterange",
-                   start = "2016-12-01",
-                   end = "2017-11-24",
-                   min = "2016-12-1",
-                   max = Sys.Date()),
     
-    tabPanel("x Variance" , plotOutput("x_variance" %>% ns))
+    tabPanel("x Variance" , plotlyOutput("x_variance" %>% ns))
     
   )
 }
@@ -37,13 +27,8 @@ mod_ui_all_shots_y <- function(id){
   
   # --------- THE UI --------
   tagList(
-    dateRangeInput(inputId = "all_date" %>% ns,
-                   label = "Choose daterange",
-                   start = "2016-12-01",
-                   end = "2017-11-24",
-                   min = "2016-12-1",
-                   max = Sys.Date()),
-    tabPanel("y Variance" , plotOutput("y_variance" %>% ns))
+    
+    tabPanel("y Variance" , plotlyOutput("y_variance" %>% ns))
     
   )
 }

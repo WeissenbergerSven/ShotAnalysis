@@ -1,10 +1,10 @@
 # ------------ PLOT SERIEN OVER TIME ----------
-mod_server_serien <- function(input, output, session, name){
+mod_server_serien <- function(input, output, session, name, datum){
   # ------------PLOT SERIEN OVER TIME -----------
-  output$serien_over_time <- renderPlot({
+  output$serien_over_time <- renderPlotly({
     all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == name() &
-                                            as.Date(shottimestamp) >= input$all_date[1]  &
-                                            as.Date(shottimestamp) <= input$all_date[2]]
+                                            as.Date(shottimestamp) >= datum()[1]  &
+                                            as.Date(shottimestamp) <= datum()[2]]
     
     serien <- get_series(all_shot_table)[
       ,':='(mean_dec = mean(ergebnis_dec),
@@ -19,7 +19,7 @@ mod_server_serien <- function(input, output, session, name){
                   method ='lm',formula=y~x, se = F)+
       
       theme_bw()
-p
+ggplotly(p)
   })
   
   return()

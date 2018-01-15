@@ -27,12 +27,19 @@ ui <-dashboardPage(
                      label = "Choose a person",
                      choices = name_selector,
                      selected = 141),
-      menuItem("All shots", tabName = "all_shots", icon = icon("dashboard"),
+      dateRangeInput(inputId = "left_all_date",
+                     label = "Choose daterange",
+                     start = "2016-12-01",
+                     end = "2017-11-24",
+                     min = "2016-12-1",
+                     max = Sys.Date()),
+      menuItem("All shots", icon = icon("dashboard"),
+               startExpanded = TRUE,
                menuSubItem("All shots", tabName = "all_shots_over_time"),
                menuSubItem("X Variance", tabName = "all_shots_x_variance"),
                menuSubItem("Y Variance", tabName = "all_shots_y_variance")
     ),
-      menuItem("Serien", icon = icon("bar-chart-o"), startExpanded = TRUE,
+      menuItem("Serien", icon = icon("bar-chart-o"), 
                menuSubItem("Serien over time", tabName = "serien_over_time"),
                menuSubItem("Sub-item 2", tabName = "subitem2")
       )
@@ -53,8 +60,12 @@ ui <-dashboardPage(
 
 # ----------- MAIN SERVER -----------
 server <- function(input, output, session) {
-  callModule(mod_server_all_shots, "ns_all_shots", name = reactive(input$leftname))
-  callModule(mod_server_serien, "ns_serien", name = reactive(input$leftname))
+  callModule(mod_server_all_shots, "ns_all_shots",
+             name = reactive(input$leftname),
+             datum = reactive(input$left_all_date))
+  callModule(mod_server_serien, "ns_serien",
+             name = reactive(input$leftname),
+             datum = reactive(input$left_all_date))
   }
 
 shinyApp(ui = ui, server = server)
