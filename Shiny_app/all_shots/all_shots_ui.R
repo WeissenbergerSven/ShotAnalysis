@@ -16,9 +16,8 @@ mod_ui_all_shots_x <- function(id){
   
   # --------- THE UI --------
   tagList(
-    
-    tabPanel("x Variance" , plotlyOutput("x_variance" %>% ns))
-    
+    tabPanel("x Variance" , 
+             plotlyOutput("x_variance" %>% ns))
   )
 }
 mod_ui_all_shots_y <- function(id){
@@ -27,8 +26,6 @@ mod_ui_all_shots_y <- function(id){
   
   # --------- THE UI --------
   tagList(
-    
-    tabPanel("y Variance" , plotlyOutput("y_variance" %>% ns))
-    
+        tabPanel("y Variance" , plotlyOutput("y_variance" %>% ns))
   )
 }
