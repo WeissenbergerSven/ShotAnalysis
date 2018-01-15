@@ -1,8 +1,8 @@
 # ------------ PLOT SERIEN OVER TIME ----------
-mod_server_serien <- function(input, output, session){
+mod_server_serien <- function(input, output, session, name){
   # ------------PLOT SERIEN OVER TIME -----------
   output$serien_over_time <- renderPlot({
-    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == input$shooter &
+    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == name() &
                                             as.Date(shottimestamp) >= input$all_date[1]  &
                                             as.Date(shottimestamp) <= input$all_date[2]]
     
@@ -16,7 +16,7 @@ mod_server_serien <- function(input, output, session){
                  color = "red", size = 3)+
       geom_point(aes(x = day, y = ergebnis_full))+
       geom_smooth(aes(x = day, y = ergebnis_full),
-                  method='lm',formula=y~x, se = F)+
+                  method ='lm',formula=y~x, se = F)+
       
       theme_bw()
    p
