@@ -19,14 +19,20 @@ source("./all_shots/all_shots_ui.R")
 source("./serien/series_ui.R")
 # ------------ MAIN UI ----------
 ui <-dashboardPage(
-  dashboardHeader(), 
+  dashboardHeader(title = "Shot Analysis"), 
   dashboardSidebar(
     sidebarMenu(
-      selectizeInput(inputId = "leftname", label = "Name", choices = c(144,141)),
-      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-      menuItem("Widgets", icon = icon("th"), tabName = "widgets"),
-      menuItem("Charts", icon = icon("bar-chart-o"), startExpanded = TRUE,
-               menuSubItem("Sub-item 1", tabName = "subitem1"),
+      selectizeInput(inputId = "leftname",
+                     label = "Choose a person",
+                     choices = name_selector,
+                     selected = 141),
+      menuItem("All shots", tabName = "all_shots", icon = icon("dashboard"),
+               menuSubItem("All shots", tabName = "all_shots_over_time"),
+               menuSubItem("X Variance", tabName = "all_shots_x_variance"),
+               menuSubItem("Y Variance", tabName = "all_shots_y_variance")
+    ),
+      menuItem("Serien", icon = icon("bar-chart-o"), startExpanded = TRUE,
+               menuSubItem("Serien over time", tabName = "serien_over_time"),
                menuSubItem("Sub-item 2", tabName = "subitem2")
       )
     ),
@@ -34,9 +40,11 @@ ui <-dashboardPage(
   ),
   dashboardBody(
     tabItems(
-      tabItem("dashboard", mod_ui_all_shots("ns_all_shots")),
-      tabItem("widgets", "Widgets tab content"),
-      tabItem("subitem1", mod_ui_serien("ns_serien")),
+      tabItem("all_shots_over_time", mod_ui_all_shots_all("ns_all_shots")),
+      tabItem("all_shots_x_variance", mod_ui_all_shots_x("ns_all_shots")),
+      tabItem("all_shots_y_variance", mod_ui_all_shots_y("ns_all_shots")),
+      
+      tabItem("serien_over_time", mod_ui_serien("ns_serien")),
       tabItem("subitem2", "Sub-item 2 tab content") 
     )
   )
@@ -44,7 +52,7 @@ ui <-dashboardPage(
 
 # ----------- MAIN SERVER -----------
 server <- function(input, output, session) {
-  callModule(mod_server_all_shots, "ns_all_shots")
+  callModule(mod_server_all_shots, "ns_all_shots", name = reactive(input$leftname))
   callModule(mod_server_serien, "ns_serien", name = reactive(input$leftname))
   }
 

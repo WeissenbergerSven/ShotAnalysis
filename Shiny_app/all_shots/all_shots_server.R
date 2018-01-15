@@ -1,8 +1,8 @@
 # ------------ PLOT ALL SHOT OVERVIEW ----------
-mod_server_all_shots <- function(input, output, session){
+mod_server_all_shots <- function(input, output, session, name){
   # ------------PLOT ALL SHOTS -----------
   output$all_shots <- renderPlot({
-    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == input$shooter &
+    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == name() &
                                             as.Date(shottimestamp) >= input$all_date[1]  &
                                             as.Date(shottimestamp) <= input$all_date[2]]
     ggplot(data = all_shot_table) +
@@ -14,7 +14,7 @@ mod_server_all_shots <- function(input, output, session){
   })
   # --------------PLOT THE X VARIANCE------------
   output$x_variance <- renderPlot({
-    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == input$shooter &
+    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == name() &
                                             as.Date(shottimestamp) >= input$all_date[1]  &
                                             as.Date(shottimestamp) <= input$all_date[2]]
     ggplot(all_shot_table) +
@@ -25,7 +25,7 @@ mod_server_all_shots <- function(input, output, session){
   })
   # ---------PLOT THE Y VARIANCE ------------
   output$y_variance <- renderPlot({
-    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == input$shooter &
+    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == name() &
                                             as.Date(shottimestamp) >= input$all_date[1]  &
                                             as.Date(shottimestamp) <= input$all_date[2]]
     ggplot(all_shot_table) +
