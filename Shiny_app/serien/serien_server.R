@@ -19,7 +19,7 @@ mod_server_serien <- function(input, output, session, name){
                   method ='lm',formula=y~x, se = F)+
       
       theme_bw()
-   p
+p
   })
   
   return()
