@@ -14,5 +14,6 @@ Imports: data.table,
     readxl,
     tidyr,
     plotly,
-    shinydashboard
+    shinydashboard,
+    shiny
 Suggests: testthat
