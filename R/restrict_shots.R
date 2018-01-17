@@ -9,15 +9,9 @@ remove_rows <- function(table_shot){
   # remove the pistol 
   table <- table[disktype == "lg"]
   # set the first shot to 1 
-  # Renumber the shoots because at some days there are multiple shot == 1
-  table_all <- data.table()
-  for(i in unique(table$day)){
-    tab <- table[day == i]
-    tab$schuss <- 1:nrow(tab)
-    table_all <- rbind(table_all, tab)
-  }
   
-  return(table_all)
+  
+  return(table)
 }
 
 
@@ -40,7 +34,14 @@ remove_columns <- function(table_shot){
                          shottimestamp,
                          day = as.Date(shottimestamp)
                          )]
-  return(table)
+  # Renumber the shoots because at some days there are multiple shot == 1
+  table_all <- data.table()
+  for(i in unique(table$day)){
+    tab <- table[day == i]
+    tab$schuss <- 1:nrow(tab)
+    table_all <- rbind(table_all, tab)
+  }
+  return(table_all)
 }
 
 

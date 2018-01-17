@@ -23,6 +23,7 @@ get_shooting_list <- function(path_to_excel,
     convert_integer() %>% 
     remove_rows() %>% 
     remove_columns()
+ 
   # devtools::use_data(LIST_OF_TABLE, overwrite = TRUE)
   return(LIST_OF_TABLE)
 }
