@@ -8,7 +8,16 @@ remove_rows <- function(table_shot){
   table <- table_shot[!is.na(winkel)]
   # remove the pistol 
   table <- table[disktype == "lg"]
-  return(table)
+  # set the first shot to 1 
+  # Renumber the shoots because at some days there are multiple shot == 1
+  table_all <- data.table()
+  for(i in unique(table$day)){
+    tab <- table[day == i]
+    tab$schuss <- 1:nrow(tab)
+    table_all <- rbind(table_all, tab)
+  }
+  
+  return(table_all)
 }
 
 

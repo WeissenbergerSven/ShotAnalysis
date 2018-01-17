@@ -7,8 +7,6 @@ library(readxl)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-library(shiny)
-library(ggplot2)
 library(shinydashboard)
 library(plotly)
 
@@ -38,7 +36,7 @@ ui <-dashboardPage(
                menuSubItem("All shots", tabName = "all_shots_over_time"),
                menuSubItem("X Variance", tabName = "all_shots_x_variance"),
                menuSubItem("Y Variance", tabName = "all_shots_y_variance")
-    ),
+      ),
       menuItem("Serien", icon = icon("bar-chart-o"), 
                menuSubItem("Serien over time", tabName = "serien_over_time"),
                menuSubItem("Sub-item 2", tabName = "subitem2")
@@ -60,12 +58,14 @@ ui <-dashboardPage(
 
 # ----------- MAIN SERVER -----------
 server <- function(input, output, session) {
+  TABLE_SHOTS <-reactive({ LIST_OF_TABLE$Shots[fidShooters == input$leftname &
+                                       as.Date(shottimestamp) >= input$left_all_date[1]  &
+                                       as.Date(shottimestamp) <= input$left_all_date[2]]
+  })
   callModule(mod_server_all_shots, "ns_all_shots",
-             name = reactive(input$leftname),
-             dates = reactive(input$left_all_date))
+             all_shot_table = TABLE_SHOTS)
   callModule(mod_server_serien, "ns_serien",
-             name = reactive(input$leftname),
-             datum = reactive(input$left_all_date))
-  }
+             all_shot_table = TABLE_SHOTS)
+}
 
 shinyApp(ui = ui, server = server)

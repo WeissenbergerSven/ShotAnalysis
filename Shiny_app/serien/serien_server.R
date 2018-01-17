@@ -1,12 +1,10 @@
 # ------------ PLOT SERIEN OVER TIME ----------
-mod_server_serien <- function(input, output, session, name, datum){
+mod_server_serien <- function(input, output, session, all_shot_table){
+  
   # ------------PLOT SERIEN OVER TIME -----------
   output$serien_over_time <- renderPlotly({
-    all_shot_table <- LIST_OF_TABLE$Shots[fidShooters == name() &
-                                            as.Date(shottimestamp) >= datum()[1]  &
-                                            as.Date(shottimestamp) <= datum()[2]]
     
-    serien <- get_series(all_shot_table)[
+        serien <- get_series(all_shot_table())[
       ,':='(mean_dec = mean(ergebnis_dec),
             mean_full = mean(ergebnis_full)),
       by = day]
@@ -17,8 +15,8 @@ mod_server_serien <- function(input, output, session, name, datum){
       geom_point(aes(x = day, y = ergebnis_full))+
       geom_smooth(aes(x = day, y = ergebnis_full),
                   method ='lm',formula=y~x, se = F)+
-      
-      theme_bw()
+          theme_bw()
+    
     ggplotly(p)
     
   })
