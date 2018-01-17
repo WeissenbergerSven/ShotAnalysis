@@ -20,6 +20,15 @@ mod_server_serien <- function(input, output, session, all_shot_table){
     ggplotly(p)
     
   })
-  
+  # Plot Shots in a serie
+  output$shots_in_serie <- renderPlotly({
+    table_data <- all_shot_table()[, ':='(schuss = schuss%%20)
+                                   ][, mittel_y := median(dec), by = schuss]
+    p <- ggplot(data = table_data)+
+      geom_point(aes(x = schuss, y = dec))+
+      geom_point(aes(x = schuss, y = mittel_y, colour = "red"))+
+      geom_hline(yintercept = median(table_data[,unique(mittel_y)]))
+    ggplotly(p)
+  })
   return()
 }

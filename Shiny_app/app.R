@@ -39,7 +39,7 @@ ui <-dashboardPage(
       ),
       menuItem("Serien", icon = icon("bar-chart-o"), 
                menuSubItem("Serien over time", tabName = "serien_over_time"),
-               menuSubItem("Sub-item 2", tabName = "subitem2")
+               menuSubItem("Shot in a serie", tabName = "shots_in_serie")
       )
     ),
     textOutput("res")
@@ -51,7 +51,7 @@ ui <-dashboardPage(
       tabItem("all_shots_y_variance", mod_ui_all_shots_y("ns_all_shots")),
       
       tabItem("serien_over_time", mod_ui_serien("ns_serien")),
-      tabItem("subitem2", "Sub-item 2 tab content") 
+      tabItem("shots_in_serie", mod_ui_serien_shots("ns_serien")) 
     )
   )
 )

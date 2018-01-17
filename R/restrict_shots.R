@@ -33,13 +33,15 @@ remove_columns <- function(table_shot){
                          dec,
                          shottimestamp,
                          day = as.Date(shottimestamp)
-                         )]
+  )]
   # Renumber the shoots because at some days there are multiple shot == 1
   table_all <- data.table()
-  for(i in unique(table$day)){
-    tab <- table[day == i]
-    tab$schuss <- 1:nrow(tab)
-    table_all <- rbind(table_all, tab)
+  for(j in unique(table$fidShooters)){
+    for(i in unique(table$day)){
+      tab <- table[day == i & fidShooters == j]
+      tab$schuss <- 1:nrow(tab)
+      table_all <- rbind(table_all, tab)
+    }
   }
   return(table_all)
 }
