@@ -62,7 +62,7 @@ ui <-dashboardPage(
 server <- function(input, output, session) {
   callModule(mod_server_all_shots, "ns_all_shots",
              name = reactive(input$leftname),
-             datum = reactive(input$left_all_date))
+             dates = reactive(input$left_all_date))
   callModule(mod_server_serien, "ns_serien",
              name = reactive(input$leftname),
              datum = reactive(input$left_all_date))
