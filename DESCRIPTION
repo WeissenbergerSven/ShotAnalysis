@@ -16,4 +16,4 @@ Imports: data.table,
     plotly,
     shinydashboard,
     shiny
-Suggests: testthat
+

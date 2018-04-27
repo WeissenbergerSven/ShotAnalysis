@@ -22,7 +22,7 @@ mod_server_serien <- function(input, output, session, all_shot_table){
   })
   # Plot Shots in a serie
   output$shots_in_serie <- renderPlotly({
-    table_data <- all_shot_table()[, ':='(schuss = schuss%%20)
+    table_data <- all_shot_table()[, ':='(schuss = schuss)
                                    ][, mittel_y := median(dec), by = schuss]
     p <- ggplot(data = table_data)+
       geom_point(aes(x = schuss, y = dec))+

@@ -41,8 +41,7 @@ ui <-dashboardPage(
                menuSubItem("Serien over time", tabName = "serien_over_time"),
                menuSubItem("Shot in a serie", tabName = "shots_in_serie")
       )
-    ),
-    textOutput("res")
+    )
   ),
   dashboardBody(
     tabItems(
