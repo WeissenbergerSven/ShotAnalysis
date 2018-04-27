@@ -8,8 +8,8 @@
 #' 
 #' @return Boolean.
 #' @export
-load_LIST_OF_TABLE_FROM_EXCEL <- function(){
-  LIST_OF_TABLE_FROM_EXCEL <- list("AllowedClasses",
+load_NAMES_EXCEL_TABLE <- function(){
+  NAMES_EXCEL_TABLE <- list("AllowedClasses",
                                    "AllowedGroups",
                                    "AllowedWeapons",
                                    "CashbookAccountTypes",
@@ -40,7 +40,7 @@ load_LIST_OF_TABLE_FROM_EXCEL <- function(){
                                    "Teams",
                                    "Weapons"
   )
-  devtools::use_data(LIST_OF_TABLE_FROM_EXCEL, overwrite = T)
+  devtools::use_data(NAMES_EXCEL_TABLE, overwrite = T)
   return(T)
 }
 

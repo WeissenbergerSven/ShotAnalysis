@@ -16,7 +16,7 @@
 get_shooting_list <- function(path_to_excel,
                               remove_empty = T, ...){
   LIST_OF_TABLE <- get_the_one_list(path_to_excel = path_to_excel,
-                                    lists_of_excel = LIST_OF_TABLE_FROM_EXCEL,
+                                    lists_of_excel = NAMES_EXCEL_TABLE,
                                     remove_empty = T)
   LIST_OF_TABLE$Shots <- LIST_OF_TABLE$Shots %>% 
     clean_shots() %>% 
