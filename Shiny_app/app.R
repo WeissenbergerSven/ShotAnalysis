@@ -40,7 +40,9 @@ ui <-dashboardPage(
       menuItem("Serien", icon = icon("bar-chart-o"), 
                menuSubItem("Serien over time", tabName = "serien_over_time"),
                menuSubItem("Shot in a serie", tabName = "shots_in_serie")
-      )
+      ),
+      menuItem("Neu", icon = icon("bar-chart-o"),
+               menuSubItem("was", tabName = "neues_tab"))
     )
   ),
   dashboardBody(
@@ -50,7 +52,9 @@ ui <-dashboardPage(
       tabItem("all_shots_y_variance", mod_ui_all_shots_y("ns_all_shots")),
       
       tabItem("serien_over_time", mod_ui_serien("ns_serien")),
-      tabItem("shots_in_serie", mod_ui_serien_shots("ns_serien")) 
+      tabItem("shots_in_serie", mod_ui_serien_shots("ns_serien"))
+      
+      ,tabItem("neues_tab", mod_ui_serien_shots("ns_serien2"))
     )
   )
 )
@@ -64,6 +68,8 @@ server <- function(input, output, session) {
   callModule(mod_server_all_shots, "ns_all_shots",
              all_shot_table = TABLE_SHOTS)
   callModule(mod_server_serien, "ns_serien",
+             all_shot_table = TABLE_SHOTS)
+  callModule(mod_server_serien, "ns_serien2",
              all_shot_table = TABLE_SHOTS)
 }
 
