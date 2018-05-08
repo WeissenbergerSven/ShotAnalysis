@@ -5,7 +5,7 @@ mod_ui_overview_table <- function(id){
   # --------- THE UI --------
   tagList(
     tabPanel("All Shots",
-             dataTableOutput("mytable")
+             dataTableOutput("mytable" %>% ns)
     )
   )
 }
