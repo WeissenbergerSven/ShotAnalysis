@@ -13,9 +13,12 @@ library(plotly)
 # -------- SERVER MODS -----------
 source("./all_shots/all_shots_server.R")
 source("./serien/serien_server.R")
+source("./overview_table/overview_table_server.R")
 #--------- UI MODS ------------
 source("./all_shots/all_shots_ui.R")
 source("./serien/series_ui.R")
+source("./overview_table/overview_table_ui.R")
+
 # ------------ MAIN UI ----------
 ui <-dashboardPage(
   dashboardHeader(title = "Shot Analysis"), 
@@ -54,7 +57,7 @@ ui <-dashboardPage(
       tabItem("serien_over_time", mod_ui_serien("ns_serien")),
       tabItem("shots_in_serie", mod_ui_serien_shots("ns_serien"))
       
-      ,tabItem("neues_tab", mod_ui_serien_shots("ns_serien2"))
+      ,tabItem("neues_tab", mod_ui_overview_table("ns_overview_date"))
     )
   )
 )
@@ -69,7 +72,7 @@ server <- function(input, output, session) {
              all_shot_table = TABLE_SHOTS)
   callModule(mod_server_serien, "ns_serien",
              all_shot_table = TABLE_SHOTS)
-  callModule(mod_server_serien, "ns_serien2",
+  callModule(mod_server_overview_table, "ns_overview_date",
              all_shot_table = TABLE_SHOTS)
 }
 
