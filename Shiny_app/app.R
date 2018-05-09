@@ -34,8 +34,11 @@ ui <-dashboardPage(
                      end = "2017-11-24",
                      min = "2016-12-1",
                      max = Sys.Date()),
+      menuItem("Overview table", icon = icon("bar-chart-o"), 
+               tabName = "neues_tab"),
+      
       menuItem("All shots", icon = icon("dashboard"),
-               startExpanded = TRUE,
+               startExpanded = FALSE,
                menuSubItem("All shots", tabName = "all_shots_over_time"),
                menuSubItem("X Variance", tabName = "all_shots_x_variance"),
                menuSubItem("Y Variance", tabName = "all_shots_y_variance")
@@ -43,9 +46,7 @@ ui <-dashboardPage(
       menuItem("Serien", icon = icon("bar-chart-o"), 
                menuSubItem("Serien over time", tabName = "serien_over_time"),
                menuSubItem("Shot in a serie", tabName = "shots_in_serie")
-      ),
-      menuItem("Neu", icon = icon("bar-chart-o"),
-               menuSubItem("was", tabName = "neues_tab"))
+      )
     )
   ),
   dashboardBody(
@@ -65,8 +66,8 @@ ui <-dashboardPage(
 # ----------- MAIN SERVER -----------
 server <- function(input, output, session) {
   TABLE_SHOTS <-reactive({ LIST_OF_TABLE$Shots[fidShooters == input$leftname &
-                                       as.Date(shottimestamp) >= input$left_all_date[1]  &
-                                       as.Date(shottimestamp) <= input$left_all_date[2]]
+                                                 as.Date(shottimestamp) >= input$left_all_date[1]  &
+                                                 as.Date(shottimestamp) <= input$left_all_date[2]]
   })
   callModule(mod_server_all_shots, "ns_all_shots",
              all_shot_table = TABLE_SHOTS)
