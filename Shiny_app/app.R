@@ -73,8 +73,7 @@ server <- function(input, output, session) {
              all_shot_table = TABLE_SHOTS)
   callModule(mod_server_serien, "ns_serien",
              all_shot_table = TABLE_SHOTS)
-  callModule(mod_server_overview_table, "ns_overview_date",
-             all_shot_table = TABLE_SHOTS)
+  callModule(mod_server_overview_table, "ns_overview_date")
 }
 
 shinyApp(ui = ui, server = server)
