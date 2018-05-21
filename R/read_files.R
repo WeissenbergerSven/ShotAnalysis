@@ -10,7 +10,6 @@
 #' get_shoting_list(path_to_excel = "Desktop/excel/")
 #' @import data.table
 #' @importFrom dplyr %>%
-#' @importFrom readxl read_excel
 #' @importFrom tidyr separate
 #' @export
 get_shooting_list <- function(path_to_excel,
@@ -39,7 +38,7 @@ get_shooting_list <- function(path_to_excel,
 #' @return data.table
 lese_excel <- function(name_excel_table, path_to_excel, format = ".xlsx", ...){
   paste0(path_to_excel, name_excel_table, format) %>% # get the right name
-    read_excel() %>%             # read the table
+    fread() %>%             # read the table
     as.data.table()              # convert into data.table
 }
 
