@@ -9,6 +9,7 @@ library(tidyr)
 library(ggplot2)
 library(shinydashboard)
 library(plotly)
+library(ggforce)
 
 # -------- SERVER MODS -----------
 source("./all_shots/all_shots_server.R")
@@ -24,18 +25,20 @@ ui <-dashboardPage(
   dashboardHeader(title = "Shot Analysis"), 
   dashboardSidebar(
     sidebarMenu(
+      menuItem("Overview table", icon = icon("bar-chart-o"), 
+               tabName = "neues_tab"),
+      
       selectizeInput(inputId = "leftname",
                      label = "Choose a person",
                      choices = name_selector,
-                     selected = 141),
+                     selected = 144),
+      
       dateRangeInput(inputId = "left_all_date",
                      label = "Choose daterange",
                      start = "2016-12-01",
                      end = "2017-11-24",
                      min = "2016-12-1",
                      max = Sys.Date()),
-      menuItem("Overview table", icon = icon("bar-chart-o"), 
-               tabName = "neues_tab"),
       
       menuItem("All shots", icon = icon("dashboard"),
                startExpanded = FALSE,
@@ -45,7 +48,8 @@ ui <-dashboardPage(
       ),
       menuItem("Serien", icon = icon("bar-chart-o"), 
                menuSubItem("Serien over time", tabName = "serien_over_time"),
-               menuSubItem("Shot in a serie", tabName = "shots_in_serie")
+               menuSubItem("Shot in a serie", tabName = "shots_in_serie"),
+               menuSubItem( "Shots after Shot", tabName = "shots_after_shot")
       )
     )
   ),
@@ -56,9 +60,10 @@ ui <-dashboardPage(
       tabItem("all_shots_y_variance", mod_ui_all_shots_y("ns_all_shots")),
       
       tabItem("serien_over_time", mod_ui_serien("ns_serien")),
-      tabItem("shots_in_serie", mod_ui_serien_shots("ns_serien"))
+      tabItem("shots_in_serie", mod_ui_serien_shots("ns_serien")),
+      tabItem("shots_after_shot", mod_ui_serien_shots_after_shot("ns_serien")),
       
-      ,tabItem("neues_tab", mod_ui_overview_table("ns_overview_date"))
+      tabItem("neues_tab", mod_ui_overview_table("ns_overview_date"))
     )
   )
 )

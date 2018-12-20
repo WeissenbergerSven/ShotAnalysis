@@ -13,12 +13,15 @@ mod_server_all_shots <- function(input, output, session, all_shot_table){
       geom_point(aes(x = x_co, y = y_co,
                      datum = day,
                      color = as.factor(full)))+
-      scale_color_manual(values = COLOURS)+
+      scale_color_manual(values = COLOURS, name = "Ringe")+
       geom_density2d(aes(x = x_co, y = y_co))+
       geom_vline(xintercept = 0)+
       geom_hline(yintercept = 0)+
       coord_cartesian(xlim = c(-1000, 1000), ylim = c(-1000, 1000))+
-      theme_bw()
+      theme_bw()+
+      labs(title = "Sämtliche Schüsse", x = "X", y = "Y")+
+      annotate("path", x = 0+1*cos(seq(0,2*pi,length.out = 100)),
+               y = 0,1*sin(seq(0,2*pi,length.out = 100)))
     ggplotly(p)
   })
   # --------------PLOT THE X VARIANCE------------

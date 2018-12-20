@@ -1,9 +1,9 @@
 # ------------ PLOT ALL SHOT OVERVIEW ----------
 mod_server_overview_table <- function(input, output, session){
-  # Anzahl der Serien in der Werung
+  # Anzahl der Serien in der Wertung
   NUMBER_COUNTED_SERIEN <- 10
   # Ausgeschlossene Namen
-  NAMES_TO_EXCLUDE <- c("RWK-Gegner", "Lichtpunkt", "Trainingsschütze")
+  NAMES_TO_EXCLUDE <- c("RWK-Gegner", "Lichtpunkt", "Trainingssch?tze")
   # Name zu id zuordner
   NAMES_TO_ID <- data.table(names = names(name_selector), fidShooters = name_selector)
   
@@ -17,6 +17,8 @@ mod_server_overview_table <- function(input, output, session){
           ,fidShooters := i] %>% 
         rbind(series_for_player)
     }
+    series_for_player <<- series_for_player
+    
     # Find the top 10 20er Serien
     top_series <- series_for_player[
       ,series_combine_number := (series-(series+1)%%2), 
@@ -31,17 +33,22 @@ mod_server_overview_table <- function(input, output, session){
                              ][, Seq := paste0("Serie", Seq)] %>% 
       spread(Seq, two_series_combined, fill = 0)
     top_series <- top_series[,lapply(.SD, mean), by = .(fidShooters)
-                             ][,':='(series_gesammt = Serie1+Serie2+
+                             ][,':='(series_gesamt = Serie1+Serie2+
                                        Serie3+Serie4+Serie5+Serie6+
                                        Serie7+Serie8+Serie9+Serie10),
                                by = fidShooters]
     top_series <- NAMES_TO_ID[top_series, on = .(fidShooters)
-                              ][order(-series_gesammt)
+                              ][order(-series_gesamt)
                                 ][,fidShooters := NULL]
+    top_series <- top_series[,':='(Platz = 1:(dim(top_series)[1]))]
     for(i in NAMES_TO_EXCLUDE){
-      top_series<- top_series[!names %like% i]
+      top_series<<- top_series[!names %like% i]
     }
-    top_series <- setcolorder(top_series, c(1,12,2, 4:11,3))
+    top_series <- setcolorder(top_series, c(13,1,12,2, 4:11,3))
+    
+    # rename the columns 
+    top_serien2 <- setnames(top_series, "names", "Name")
+    top_serien2 <- setnames(top_series, "series_gesamt", "Gesamt")
   })
   
   return()

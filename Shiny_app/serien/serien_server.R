@@ -30,5 +30,16 @@ mod_server_serien <- function(input, output, session, all_shot_table){
       geom_hline(yintercept = median(table_data[,unique(mittel_y)]))
     ggplotly(p)
   })
+  
+  # Plot Shots after a Shot
+  output$shots_after_shot <- renderPlotly({
+    table_data <- all_shot_table()[, ':='(schuss = schuss)
+                                   ][, full_zuvor := c( NA, 
+                                                          full[1:(length(full)-1)])]
+    
+    p <- ggplot(data = table_data)+
+      geom_violin(aes(x = factor(full_zuvor), y = full))
+    ggplotly(p)
+  })
   return()
 }

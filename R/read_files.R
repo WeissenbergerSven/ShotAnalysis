@@ -38,7 +38,7 @@ get_shooting_list <- function(path_to_excel,
 #' @return data.table
 lese_excel <- function(name_excel_table, path_to_excel, format = ".xlsx", ...){
   paste0(path_to_excel, name_excel_table, format) %>% # get the right name
-    fread() %>%             # read the table
+    read_xlsx() %>%             # read the table
     as.data.table()              # convert into data.table
 }
 

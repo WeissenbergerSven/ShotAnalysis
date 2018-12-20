@@ -11,4 +11,4 @@ devtools::install_github("WeissenbergerSven/ShotAnalysis")
 library(ShotAnalysis)
 
 Load new tables:
-Shoting_list <- get_shooting_list(path_to_excel
+Shoting_list <- get_shooting_list(path_to_excel)
